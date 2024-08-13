@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Checkout from './pages/Checkout';
 import ProductList from './pages/ProductList';
 import Cart from './pages/Cart';
@@ -10,6 +10,7 @@ function App() {
   return (
     <Router>
       <Routes>
+      <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/products" element={<ProductList />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />

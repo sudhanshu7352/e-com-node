@@ -3,7 +3,7 @@ import { IProd } from "../models/Cart";
 
 export const calculateTotalPrice = (products: Array<{ productId: string | IProd; quantity: number }>): number => {
 
-    console.log("totalprice :", products)
+    // console.log("totalprice :", products)
     let total = 0;
     products.forEach(item => {
         if (typeof item.productId === 'object') {

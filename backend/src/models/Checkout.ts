@@ -2,7 +2,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 export interface ICheckout extends Document {
     user: string;
-    products: Array<{ product: string; quantity: number }>;
+    products: Array<{ productId: string; quantity: number }>;
     shippingAddress: string;
     totalPrice: number;
     status: string;

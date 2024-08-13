@@ -8,7 +8,7 @@ const Register = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await api.post('/auth/register', { email, password });
+      await api.post(`${process.env.REACT_APP_API_URL}/auth/register`, { email, password });
       alert('Registration successful');
     } catch (err) {
       console.error(err);

@@ -9,13 +9,13 @@ import { calculateTotalPrice } from '../utils/cartTotal';
 
 export const getCart = async (req: CustomRequest, res: Response) => {
   try {
-    // Assuming req.userId contains the ID of the authenticated user
-    const cart = await Cart.findOne({ user: req.userId })
-      .populate('products.product') // Populate the product details
+    // console.log("re user id :",req.user?.userId )
+    const cart = await Cart.findOne({ user: req.user?.userId })
+      .populate('products.productId') // Populate the product details
       .exec();
 
-    if (!cart) {
-      return res.status(404).json({ message: 'Cart not found' });
+      if (!cart) {
+        return res.status(200).json({ message: 'Your cart is empty' });
     }
 
     res.status(200).json(cart);
@@ -31,9 +31,9 @@ export const getCart = async (req: CustomRequest, res: Response) => {
 };
 
 export const addToCart = async (req: CustomRequest, res: Response) => {
-  const { productId, quantity } = req.body.products[0];
-  const userId =req.user?.userId;
- console.log(req.body.products[0],userId)
+  console.log("req:", req.body)
+  const { productId, quantity } = req.body;
+  const userId = req.user?.userId;
   try {
     const product = await Product.findById(productId);
     if (!product) return res.status(404).json({ error: 'Product not found' });
@@ -46,7 +46,7 @@ export const addToCart = async (req: CustomRequest, res: Response) => {
       if (productIndex >= 0) {
         cart.products[productIndex].quantity += quantity;
       } else {
-        cart.products.push({  productId, quantity });
+        cart.products.push({ productId, quantity });
       }
     }
     await cart.save();
@@ -64,38 +64,43 @@ export const addToCart = async (req: CustomRequest, res: Response) => {
 
 export const checkoutCart = async (req: CustomRequest, res: Response) => {
   const { shippingAddress } = req.body;
-   const userId = req.user?.userId;
+  const userId = req.user?.userId;
   //  console.log("req: ",req.user)
   try {
-    let cart = await Cart.findOne({ user: userId}).populate('products.productId');
+    let cart = await Cart.findOne({ user: userId }).populate('products.productId');
     if (!cart || cart.products.length === 0) return res.status(400).json({ error: 'Cart is empty' });
 
     const totalPrice = calculateTotalPrice(cart.products);
-   console.log("cart :",cart.products)
+    // console.log("cart :", cart.products)
     const newCheckout = new Checkout({
-        user: userId,
-        products: cart.products,
-        shippingAddress,
-        totalPrice,
-        status: 'pending'
+      user: userId,
+      products: cart.products,
+      shippingAddress,
+      totalPrice,
+      status: 'pending'
     });
 
     await newCheckout.save();
+
+    console.log(req.user)
+
     const transporter = nodemailer.createTransport({
-      service: 'yahoo',
+      service: 'gmail',
+      // secure: true,
+      // port :465,
       auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS }
     });
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: req.userEmail,
+      to: req.user?.email,
       subject: 'Order Confirmation',
-      text: `Your order has been confirmed and will be shipped to: ${shippingAddress}`
+      text: `Your order of ₹ ${totalPrice} has been confirmed and will be shipped to: ${shippingAddress}`
     });
 
     cart.products = [];
     await cart.save();
-    res.json({ message: 'Checkout successful' });
+    res.json({ message: 'Checkout successful', "items": newCheckout });
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);

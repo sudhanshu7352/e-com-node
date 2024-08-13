@@ -6,7 +6,8 @@ export interface CustomRequest extends Request {
   userEmail?: string;
   user?: {
     userId: string,
-    role: string
+    role: string,
+    email:string
   },
   file?: {
     filename: string;

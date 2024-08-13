@@ -13,8 +13,8 @@ const Checkout = () => {
       setMessage('Checkout successful!');
       setShippingAddress(''); // Clear the shipping address
       setTimeout(() => {
-        navigate('/products'); // Redirect to the products page or another page
-      }, 3000); // Wait for 3 seconds before redirecting
+        navigate('/products'); // Redirect to the products page 
+      }, 3000); 
     } catch (err) {
       console.error(err);
       setMessage('Checkout failed. Please try again.');
