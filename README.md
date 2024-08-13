@@ -5,18 +5,26 @@
 
 This is a full-stack e-commerce application built using the MERN stack (MongoDB, Express, React, Node.js). The application allows users to browse products, add items to a shopping cart, and proceed to checkout. The admin panel allows product management, and the application features user authentication, cart management, and order processing.
 
+### Demo Images
+Product Page
+![image](https://github.com/user-attachments/assets/822cbd83-80c2-45a2-9747-2eb37a0f0d75)
+Cart Page
+![image](https://github.com/user-attachments/assets/88cee13f-62b8-42e0-8c59-3a62138f7c10)
+Login Page
+![image](https://github.com/user-attachments/assets/b3e38b9b-d906-47fd-bdf0-c9766d99eac4)
+
+
 ## Features
 
 - **User Authentication**: Login and registration functionality.
 - **Product Management**: Admins can add, edit, and delete products.
 - **Shopping Cart**: Users can add products to the cart and view the cart contents.
 - **Checkout Process**: Users can enter a shipping address and place orders.
-- **Responsive Design**: The frontend is fully responsive and works well on both desktop and mobile devices.
 
 ## Tech Stack
 
-- **Frontend**: React, TypeScript, Axios, React Router, Bootstrap
-- **Backend**: Node.js, Express.js, MongoDB, Mongoose, JWT, Multer
+- **Frontend**: React, TypeScript, Axios, React Router
+- **Backend**: Node.js, Express.js,TypeScript, MongoDB, Mongoose, JWT, Multer
 - **Database**: MongoDB
 - **Others**: Nodemailer for sending emails
 
@@ -28,7 +36,7 @@ e-com-project/
 │   ├── src/
 │   │   ├── components/      # React components
 │   │   ├── pages/           # React pages
-│   │   ├── services/        # API service calls
+│   │   ├── utils/           # API service
 │   │   ├── App.tsx          # Main App component
 │   │   ├── index.tsx        # ReactDOM rendering
 │   └── public/              # Static files
@@ -39,13 +47,11 @@ e-com-project/
 │   │   ├── middlewares/     # Express middlewares
 │   │   ├── models/          # Mongoose models
 │   │   ├── routes/          # Express routes
-│   │   ├── config/          # Configuration files (DB, environment variables)
 │   │   ├── utils/           # Utility functions
-│   │   └── app.ts           # Main Express app
+│   │   └── server.ts           # Main Express app
 │
 ├── .env                     # Environment variables
 ├── .gitignore               # Git ignore file
-├── README.md                # Project documentation
 ├── package.json             # Node.js dependencies
 └── tsconfig.json            # TypeScript configuration
 ```
@@ -55,7 +61,6 @@ e-com-project/
 - Node.js
 - MongoDB
 - NPM or Yarn
-- [Git](https://git-scm.com/)
 - Nodemailer email account setup (e.g., Gmail with app password)
 
 ## Getting Started
@@ -64,7 +69,7 @@ e-com-project/
 
 ```bash
 git clone https://github.com/sudhanshu7352/e-com-node.git
-cd e-com-project
+cd e-com-node
 ```
 
 ### 2. Set Up the Backend
