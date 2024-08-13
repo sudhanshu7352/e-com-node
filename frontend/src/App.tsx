@@ -13,9 +13,10 @@ function App() {
       <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/products" element={<ProductList />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
+        {/* <Route path="/checkout" element={<Checkout />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        {/* <Route path="/admin" element={<ProtectedRoute role="super-admin"><AdminPage /></ProtectedRoute>} /> */}
       </Routes>
     </Router>
   );

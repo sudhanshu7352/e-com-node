@@ -3,7 +3,8 @@ import api from '../utils/api';
 import { IProduct } from '../interfaces/Product';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import Navbar from './Navbar';
+import './cart.css'
 interface CartProduct {
     productId: IProduct;
     quantity: number;
@@ -52,9 +53,9 @@ const Cart = () => {
                 { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
             );
             alert('Checkout successful, you will receive a confirmation mail.');
-            setShippingAddress(''); 
+            setShippingAddress('');
             setTimeout(() => {
-                navigate('/products'); 
+                navigate('/products');
             }, 3000);
         } catch (err) {
             console.error(err);
@@ -64,27 +65,32 @@ const Cart = () => {
 
     return (
         <div>
-            <h2>Your Cart</h2>
-            {cart?.message ? (
-                <h2>{cart.message}</h2>
-            ) : (
-                <div>
-                    {cart?.map((item: CartProduct) => (
-                        <div key={item._id}>
-                            <h3>{item.productId.title}</h3>
-                            <p>Quantity: {item.quantity}</p>
-                        </div>
-                    ))}
-                    <input
-                        type="text"
-                        value={shippingAddress}
-                        onChange={(e) => setShippingAddress(e.target.value)}
-                        placeholder="Shipping Address"
-                        required
-                    />
-                    <button onClick={handleCheckout}>Checkout</button>
-                </div>
-            )}
+            <Navbar />
+            <div className="cart-container">
+                <h2 className="cart-title">Your Cart</h2>
+                {cart?.message ? (
+                    <h2 className="cart-message">{cart.message}</h2>
+                ) : (
+                    <div className="cart-items">
+                        {cart?.map((item: CartProduct) => (
+                            <div className="cart-item" key={item._id}>
+                                <h3 className="cart-item-title">{item.productId.title}</h3>
+                                <p className="cart-item-quantity">Quantity: {item.quantity}</p>
+                            </div>
+                        ))}
+                        <input
+                            type="text"
+                            value={shippingAddress}
+                            onChange={(e) => setShippingAddress(e.target.value)}
+                            placeholder="Shipping Address"
+                            required
+                            className="cart-shipping-input"
+                        />
+                        <button className="cart-checkout-button" onClick={handleCheckout}>Checkout</button>
+                    </div>
+                )}
+            </div>
+
         </div>
     );
 };

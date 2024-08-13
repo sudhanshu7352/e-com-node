@@ -4,8 +4,10 @@ import { CustomRequest } from '../../types/express';
 
 export const addProduct = async (req: CustomRequest, res: Response) => {
     const { title, description, price } = req.body;
-    const image = req.file?.path;
-    // console.log("rqf",req.file);
+    let image = req.file?.path;
+    image= image?.replace('\\', '/');
+    // const imageUrl = `uploads/${req.file.filename}`;
+    console.log("Uploaded file:", req.file);
     if (!image) {
         return res.status(400).json({ error: 'Image upload failed. Please try again.' });
     }
@@ -60,7 +62,6 @@ export const deleteProduct = async (req: Request, res: Response) => {
 export const updateProduct = async (req: CustomRequest, res: Response) => {
     const productId = req.params.id;
     const { title, description, price } = req.body;
-    console.log(req.body, productId)
     const image = req.file?.path;
     try {
         const product = await Product.findByIdAndUpdate(

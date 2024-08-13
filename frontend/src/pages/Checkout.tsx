@@ -11,9 +11,9 @@ const Checkout = () => {
     try {
       await api.post('/cart/checkout', { shippingAddress });
       setMessage('Checkout successful!');
-      setShippingAddress(''); // Clear the shipping address
+      setShippingAddress(''); 
       setTimeout(() => {
-        navigate('/products'); // Redirect to the products page 
+        navigate('/products'); 
       }, 3000); 
     } catch (err) {
       console.error(err);

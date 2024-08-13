@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth';
 import productRoutes from './routes/product';
 import cartRoutes from './routes/cart';
-
+import path from 'path';
 dotenv.config();
 
 const app = express();
@@ -13,6 +13,8 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/api/uploads', express.static('uploads'))
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);

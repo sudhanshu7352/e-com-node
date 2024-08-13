@@ -38,3 +38,61 @@
     opacity: 80%;
     cursor: pointer;
 }
+/* General Form Styling */
+form {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Input Fields */
+input[type="email"], input[type="password"] {
+    width: calc(100% - 40px);
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+input[type="email"]:focus, input[type="password"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Button */
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    form {
+        width: 90%;
+        margin: 20px auto;
+    }
+}

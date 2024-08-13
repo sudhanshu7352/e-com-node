@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import api, { setAuthToken } from '../utils/api';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
-
+import "../App.css"
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,6 +13,8 @@ const Login = () => {
     try {
       const res = await api.post(`${process.env.REACT_APP_API_URL}/auth/login`, { email, password });
       localStorage.setItem('token', res.data.token);
+      localStorage.setItem('role', res.data.role);
+      console.log(res.data)
       setAuthToken(res.data.token);
       alert(res.data.message);
       navigate('/products');
@@ -32,6 +34,7 @@ const Login = () => {
       <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
       <button type="submit">Login</button>
+      <p>Don't have an account? <Link to="/register">Register</Link></p>
     </form>
   );
 };
