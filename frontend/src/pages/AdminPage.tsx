@@ -99,7 +99,7 @@ const AdminPage = () => {
             <button onClick={() => handleLogout()}>
                 Logout
             </button>
-            <div>
+            <div className="el_container div_shadow">
                 <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
                 <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
                 <input type="number" placeholder="Price" value={price} onChange={(e) => setPrice(parseFloat(e.target.value))} />
@@ -114,7 +114,8 @@ const AdminPage = () => {
                         <h3>{product.title}</h3>
                         <p>{product.description}</p>
                         <p>{product.price}</p>
-                        <img src={product.image} alt='product' />
+                        <img src={`${process.env.REACT_APP_API_URL}/${product.image}`}
+                            alt={product.title} />
                         <button onClick={() => handleEditProduct(product._id)}>Edit</button>
                         <button onClick={() => handleDeleteProduct(product._id)}>Delete</button>
                     </div>
